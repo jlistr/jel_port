@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Contact Jana Elise Lister for professional modeling services in Austin, San Antonio, and New Braunfels. Book a model for your next photoshoot or commercial project.">
+    <meta name="keywords"
+        content="Contact Jana Elise Lister, Book a Model, Austin Model, New Braunfels Model, San Antonio Model, Fashion Model Booking, Professional Model Inquiry">
+        <title>Contact Jana Elise Lister | Professional Model Booking Inquiry</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&family=Montserrat:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Header Section -->
+        <header class="Layout_Header sticky-header">
+            <div class="logo-container">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-name">Jana Elise Lister</div>
+                    <div class="logo-tagline">Model</div>
+                </a>
+            </div>
+            <div class="Layout_Header-menu">
+                <div class="Layout_Header-nav">
+                    <a href="portfolio.html">Portfolio</a>
+                    <a href="about.html">About</a>
+                    <a href="services.html">Services</a>
+                    <a href="contact.html" class="Layout_selected">Contact</a>
+                </div>
+                <div class="Layout_Header-contact">
+                    <div class="ContactLinks">
+                        <div class="ContactLinks-icon-link">
+                            <a class="ContactLinks-link" target="_blank" rel="noopener"
+                                href="https://www.instagram.com/jana.listerr">
+                                <div class="ContactLinks-visually-hidden">Instagram</div>
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="Layout_Header-menu-toggle">
+                <svg width="24" height="15" viewBox="0 0 24 15" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="4" width="20" height="3"></rect>
+                    <rect y="6" width="24" height="3"></rect>
+                    <rect x="9.3335" y="12" width="14.6667" height="3"></rect>
+                </svg>
+            </div>
+        </header>
+
+        <!-- Hidden Toggle Menu -->
+        <div class="menu-overlay">
+            <div class="menu-content">
+                <div class="menu-nav">
+                    <a href="portfolio.html">Portfolio</a>
+                    <a href="about.html">About</a>
+                    <a href="services.html">Services</a>
+                    <a href="contact.html" class="active">Contact</a>
+                </div>
+                <button class="menu-close" aria-label="Close menu">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                        stroke-linejoin="round" height="30" width="30">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <main>
+            <section class="contact-section">
+                <h1>Contact Jana Elise Lister</h1>
+                    <h2>Book a Professional Model for Your Next Project</h2>
+                <div class="contact-container">
+                    
+                    <p>Get in touch with Jana Elise Lister for editorial, commercial, and creative modeling
+                        opportunities.</p>
+                    <p>Please leave your name, e-mail, and a brief message about what service you are inquiring about,
+                        and I will get back to you shortly!</p>
+                    <form id="contactForm" class="contact-form" action="https://formspree.io/f/{your-form-id}"
+                        method="POST">
+                        <label for="firstName">Name <span class="required">(required)</span></label>
+                        <div class="name-fields">
+                            <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                            <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+                        </div>
+                        <label for="email">Email <span class="required">(required)</span></label>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        <label for="message">Message <span class="required">(required)</span></label>
+                        <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                        <button type="submit" class="submit-btn">SEND</button>
+                    </form>
+                    <!-- Toaster Container -->
+                    <div id="toaster" class="toaster hidden">Thank you! Your message has been sent.</div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer -->
+        <footer>
+            <div class="footer-container">
+                <div class="footer-connect">Connect with me:</div>
+                <div class="footer-icon">
+                    <a href="https://www.instagram.com/jana.listerr" target="_blank" rel="noopener">
+                        <i class="fab fa-instagram fa-2x"></i>
+                    </a>
+                </div>
+                <div class="footer-copyright">
+                    &copy; 2025 Jana Elise Lister. All Rights Reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
