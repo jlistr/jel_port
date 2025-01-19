@@ -1150,6 +1150,10 @@ footer {
     font-size: 1rem;
 }
 
+/* Hide hidden input fields */
+input[name="form-name"] {
+    display: none;
+}
 .contact-form input:focus,
 .contact-form textarea:focus {
     border-color: var(--primary-color);
