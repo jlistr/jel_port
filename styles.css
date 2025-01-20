@@ -1101,29 +1101,25 @@ footer {
 /********************************************** CONTACT ME ****************************************************************/
 
 .contact-section {
+    background: #ffffff;
     max-width: 800px;
     margin: 50px auto;
     padding: 40px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
 }
 
 .contact-section h1 {
     font-size: 2.5rem;
-    color: var(--primary-color);
+    font-weight: 700;
+    color: #FF7AA2;
     margin-bottom: 10px;
-}
-
-.contact-section h2 {
-    font-size: 1.5rem;
-    color: var(--text-color);
-    margin-bottom: 20px;
 }
 
 .contact-section p {
     font-size: 1.1rem;
+    color: #333;
     margin-bottom: 20px;
     line-height: 1.6;
 }
@@ -1132,82 +1128,118 @@ footer {
 .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
+}
+
+.form-group {
+    text-align: left;
+    width: 100%;
 }
 
 .contact-form label {
-    font-weight: bold;
-    text-align: left;
-}
-
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-family: 'Montserrat', sans-serif;
     font-size: 1rem;
+    color: #666;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 15px;
 }
 
-/* Hide hidden input fields */
-input[name="form-name"] {
-    display: none;
-}
-.contact-form input:focus,
-.contact-form textarea:focus {
-    border-color: var(--primary-color);
-    outline: none;
-    box-shadow: 0 0 5px rgba(255, 122, 162, 0.5);
-}
-
+/* Ensure inputs align properly */
 .name-fields {
     display: flex;
-    gap: 10px;
+    gap: 15px;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.name-fields input {
-    flex: 1;
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 20px;
 }
 
-/* Submit Button */
+/* Fix input sizes */
+.name-fields {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;  /* Added spacing between name fields and next label */
+}
+
+/* Responsive fixes for smaller screens */
+@media (max-width: 768px) {
+    .name-fields {
+        flex-direction: column;
+    }
+
+    .name-fields input {
+        width: 100%;
+    }
+}
+
+/* Button Styling */
 .submit-btn {
-    background-color: var(--button-color);
-    color: #fff;
+    background-color: #7AAEFF;
+    color: white;
     border: none;
-    padding: 15px;
+    border-radius: 8px;
+    padding: 12px 30px;
     font-size: 1.2rem;
-    font-family: 'Montserrat', sans-serif;
-    border-radius: 5px;
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s ease;
+    text-transform: uppercase;
 }
 
 .submit-btn:hover {
-    background-color: var(--button-hover);
+    background-color: #5A8FDB;
 }
 
-/* Toaster Message */
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 20px;
+    }
+
+    .name-fields {
+        flex-direction: column;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        width: 100%;
+    }
+}
+
+/* Toaster Notification */
 .toaster {
-    display: none;
-    margin-top: 20px;
-    padding: 15px;
-    background-color: var(--primary-color);
-    color: #fff;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #28a745;
+    color: white;
+    padding: 15px 30px;
     border-radius: 5px;
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: 1.2rem;
+    display: none;
 }
 
 .toaster.show {
     display: block;
-    animation: fadeIn 0.5s ease-in-out;
 }
 
 .hidden {
     display: none;
 }
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .contact-section {

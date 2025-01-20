@@ -161,3 +161,36 @@ function showToaster(message) {
         toaster.classList.add("hidden");
     }, 3000);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const contactForm = document.getElementById("contactForm");
+    if (contactForm) {
+        contactForm.addEventListener("submit", async function (e) {
+            e.preventDefault(); // Prevent default submission
+
+            const formData = new FormData(contactForm);
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: contactForm.method,
+                    body: formData,
+                    headers: {
+                        Accept: "application/json",
+                    },
+                });
+
+                if (response.ok) {
+                    showToaster("Thank you! Your message has been sent."); 
+                    contactForm.reset();
+                } else {
+                    showToaster("Oops! There was a problem. Please try again.");
+                }
+            } catch (error) {
+                showToaster("An error occurred. Please try again.");
+                console.error("Form submission error:", error);
+            }
+        });
+    } else {
+        console.error("Error: The form element with ID 'contactForm' was not found in the DOM.");
+    }
+});
