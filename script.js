@@ -1,70 +1,106 @@
+// ===================================
+// IMAGE VIEWER FUNCTIONALITY
+// ===================================
+
 // Select necessary elements
 const galleryImages = document.querySelectorAll('.gallery-image');
-const imageViewer = document.getElementById('image-viewer');
-const viewerImage = document.getElementById('viewer-image');
-const modelInfo = document.getElementById('model-info');
-const photographerInfo = document.getElementById('photographer-info');
-const imageViewerCloseButton = document.querySelector('.close-btn');
+const modal = document.getElementById('imageModal');
+const modalImg = document.getElementById('fullImage');
+const captionText = document.getElementById('caption');
+const closeModal = document.querySelector('.close');
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
-const menuToggle = document.querySelector(".Layout_Header-menu-toggle");
-const menuOverlay = document.querySelector(".menu-overlay");
-const menuCloseButton = document.querySelector(".menu-close");
+const photoCredit = document.getElementById('photo-credit');
+const creditLink = document.getElementById('credit-link');
+const creditText = document.getElementById('credit-text');
 
-let currentIndex = null; // Start with null to indicate no image is active
+// Track the current index in the gallery
+let currentIndex = null;
 
-// Open the image viewer
+// Function to open the modal with the selected image and show credit
 function openViewer(index) {
     if (index < 0 || index >= galleryImages.length || !galleryImages[index]) {
         console.error("Invalid index or image not found:", index);
         return;
     }
+
     const image = galleryImages[index];
-    viewerImage.src = image.src; // Set the image source
-    modelInfo.textContent = image.dataset.model || 'Model: Unknown';
-    photographerInfo.textContent = image.dataset.photographer || 'Photographer: Unknown';
-    imageViewer.style.display = 'flex';
+    modal.style.display = 'block';
+    modalImg.src = image.getAttribute('data-full'); // Set the full-size image
+    captionText.innerHTML = `${image.getAttribute('data-model')}`;
+
+    // Update photographer credit with Instagram link
+    const photographerInfo = image.getAttribute('data-photographer');
+    const instagramHandle = photographerInfo.match(/\(@(.*?)\)/); // Extract handle from text
+    if (instagramHandle) {
+        const handle = instagramHandle[1];
+        creditText.textContent = photographerInfo;
+        creditLink.href = `https://www.instagram.com/${handle}`;
+    } else {
+        creditText.textContent = photographerInfo;
+        creditLink.href = "#";
+    }
+
+    // Show the credit section
+    photoCredit.style.display = 'flex';
     currentIndex = index;
 }
 
-// Close the image viewer
+// Function to close the modal
 function closeViewer() {
-    imageViewer.style.display = 'none';
+    modal.style.display = 'none';
+    photoCredit.style.display = 'none'; // Hide credit when modal closes
     currentIndex = null;
 }
 
-// Navigate to the next image
+// Function to show the next image
 function showNext() {
     if (currentIndex === null || galleryImages.length === 0) return;
     currentIndex = (currentIndex + 1) % galleryImages.length;
     openViewer(currentIndex);
 }
 
-// Navigate to the previous image
+// Function to show the previous image
 function showPrev() {
     if (currentIndex === null || galleryImages.length === 0) return;
     currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
     openViewer(currentIndex);
 }
 
-// Add event listeners for gallery images
+// Add event listeners to gallery images for opening modal
 galleryImages.forEach((img, index) => {
     img.addEventListener('click', () => openViewer(index));
 });
 
-// Add event listeners for navigation buttons
-if (imageViewerCloseButton) imageViewerCloseButton.addEventListener('click', closeViewer);
-if (prevBtn) prevBtn.addEventListener('click', showPrev);
-if (nextBtn) nextBtn.addEventListener('click', showNext);
+// Add event listeners for closing and navigation
+closeModal.addEventListener('click', closeViewer);
+prevBtn.addEventListener('click', showPrev);
+nextBtn.addEventListener('click', showNext);
 
-// Add keyboard navigation
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeViewer();
-    if (e.key === 'ArrowRight' && currentIndex !== null) showNext();
-    if (e.key === 'ArrowLeft' && currentIndex !== null) showPrev();
+// Close modal if user clicks outside of the image
+window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        closeViewer();
+    }
 });
 
-// Handle menu toggle and close functionality
+// Add keyboard navigation support
+document.addEventListener('keydown', (e) => {
+    if (modal.style.display === 'block') {
+        if (e.key === 'Escape') closeViewer();
+        if (e.key === 'ArrowRight') showNext();
+        if (e.key === 'ArrowLeft') showPrev();
+    }
+});
+
+// ===================================
+// MOBILE NAVIGATION MENU
+// ===================================
+
+const menuToggle = document.querySelector(".Layout_Header-menu-toggle");
+const menuOverlay = document.querySelector(".menu-overlay");
+const menuCloseButton = document.querySelector(".menu-close");
+
 if (menuToggle && menuOverlay && menuCloseButton) {
     menuToggle.addEventListener('click', () => menuOverlay.classList.add('open'));
     menuCloseButton.addEventListener('click', () => menuOverlay.classList.remove('open'));
@@ -75,7 +111,10 @@ if (menuToggle && menuOverlay && menuCloseButton) {
     });
 }
 
-// Adjust gallery images for Masonry layout
+// ===================================
+// MASONRY GALLERY LAYOUT
+// ===================================
+
 galleryImages.forEach((img) => {
     img.onload = () => {
         const aspectRatio = img.naturalWidth / img.naturalHeight;
@@ -83,12 +122,10 @@ galleryImages.forEach((img) => {
     };
 });
 
-// Prevent automatic execution on page load
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("Script loaded successfully.");
-});
+// ===================================
+// LAZY LOAD "BOOK ME" BUTTON
+// ===================================
 
-// Lazy load adjustment for Book Me button
 document.addEventListener('DOMContentLoaded', () => {
     const bookMeButton = document.querySelector('.book-me-btn');
 
@@ -103,38 +140,38 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Contact form submission & Formspree integration
+// ===================================
+// FORM SUBMISSION HANDLING
+// ===================================
+
 document.getElementById("contactForm").addEventListener("submit", async function (e) {
     e.preventDefault(); // Prevent the default form submission
 
     const form = e.target;
     const submitButton = form.querySelector(".submit-btn");
 
-    // 3. Validate form fields before submitting
+    // Validate form fields before submitting
     if (!form.checkValidity()) {
         showToaster("Please fill out all required fields correctly.");
         return;
     }
 
-    // 1. Show loading state and 2. Disable button to prevent duplicate submissions
+    // Show loading state and disable button to prevent duplicate submissions
     submitButton.textContent = "Sending...";
     submitButton.disabled = true;
 
-    // Collect form data
     const formData = new FormData(form);
 
     try {
         const response = await fetch(form.action, {
             method: form.method,
             body: formData,
-            headers: {
-                Accept: "application/json",
-            },
+            headers: { Accept: "application/json" },
         });
 
         if (response.ok) {
-            showToaster("Thank you! Your message has been sent."); // Show toaster
-            form.reset(); // Reset the form
+            showToaster("Thank you! Your message has been sent.");
+            form.reset();
         } else {
             showToaster("Oops! There was a problem. Please try again.");
         }
@@ -143,54 +180,26 @@ document.getElementById("contactForm").addEventListener("submit", async function
         console.error("Form submission error:", error);
     }
 
-    // Reset button text and enable it after the process is complete
+    // Reset button text and enable it after processing
     submitButton.textContent = "SEND";
     submitButton.disabled = false;
 });
 
-// Function to show the toaster message
+// Show toaster messages
 function showToaster(message) {
     const toaster = document.getElementById("toaster");
     toaster.textContent = message;
     toaster.classList.remove("hidden");
     toaster.classList.add("show");
 
-    // Hide the toaster after 3 seconds
+    // Hide toaster after 3 seconds
     setTimeout(() => {
         toaster.classList.remove("show");
         toaster.classList.add("hidden");
     }, 3000);
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const contactForm = document.getElementById("contactForm");
-    if (contactForm) {
-        contactForm.addEventListener("submit", async function (e) {
-            e.preventDefault(); // Prevent default submission
-
-            const formData = new FormData(contactForm);
-
-            try {
-                const response = await fetch(contactForm.action, {
-                    method: contactForm.method,
-                    body: formData,
-                    headers: {
-                        Accept: "application/json",
-                    },
-                });
-
-                if (response.ok) {
-                    showToaster("Thank you! Your message has been sent."); 
-                    contactForm.reset();
-                } else {
-                    showToaster("Oops! There was a problem. Please try again.");
-                }
-            } catch (error) {
-                showToaster("An error occurred. Please try again.");
-                console.error("Form submission error:", error);
-            }
-        });
-    } else {
-        console.error("Error: The form element with ID 'contactForm' was not found in the DOM.");
-    }
+// Prevent automatic execution on page load
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("Script loaded successfully.");
 });
