@@ -13,84 +13,124 @@ const nextBtn = document.getElementById('next-btn');
 const photoCredit = document.getElementById('photo-credit');
 const creditLink = document.getElementById('credit-link');
 const creditText = document.getElementById('credit-text');
+const playBtn = document.getElementById('play-btn');
+const slideIndicators = document.getElementById('slide-indicators');
 
-// Track the current index in the gallery
-let currentIndex = null;
+let currentIndex = 0;
+let slideshowInterval;
+let isPlaying = false;
 
-// Function to open the modal with the selected image and show credit
+// Open the modal with the clicked image
 function openViewer(index) {
-    if (index < 0 || index >= galleryImages.length || !galleryImages[index]) {
-        console.error("Invalid index or image not found:", index);
-        return;
-    }
-
-    const image = galleryImages[index];
-    modal.style.display = 'block';
-    modalImg.src = image.getAttribute('data-full'); // Set the full-size image
-    captionText.innerHTML = `${image.getAttribute('data-model')}`;
-
-    // Update photographer credit with Instagram link
-    const photographerInfo = image.getAttribute('data-photographer');
-    const instagramHandle = photographerInfo.match(/\(@(.*?)\)/); // Extract handle from text
-    if (instagramHandle) {
-        const handle = instagramHandle[1];
-        creditText.textContent = photographerInfo;
-        creditLink.href = `https://www.instagram.com/${handle}`;
-    } else {
-        creditText.textContent = photographerInfo;
-        creditLink.href = "#";
-    }
-
-    // Show the credit section
-    photoCredit.style.display = 'flex';
     currentIndex = index;
+    const image = galleryImages[currentIndex];
+    modal.style.display = 'flex';
+    modalImg.src = image.getAttribute('data-full');
+    captionText.innerHTML = `${image.getAttribute('data-model')}<br>${image.getAttribute('data-photographer')}`;
+    updateIndicators();
 }
 
-// Function to close the modal
+// Close the modal
 function closeViewer() {
     modal.style.display = 'none';
-    photoCredit.style.display = 'none'; // Hide credit when modal closes
-    currentIndex = null;
+    stopSlideshow();
 }
 
-// Function to show the next image
+// Show next image
 function showNext() {
-    if (currentIndex === null || galleryImages.length === 0) return;
     currentIndex = (currentIndex + 1) % galleryImages.length;
     openViewer(currentIndex);
 }
 
-// Function to show the previous image
+// Show previous image
 function showPrev() {
-    if (currentIndex === null || galleryImages.length === 0) return;
     currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
     openViewer(currentIndex);
 }
 
-// Add event listeners to gallery images for opening modal
+// Update slide indicators
+function updateIndicators() {
+    slideIndicators.innerHTML = '';
+    galleryImages.forEach((_, idx) => {
+        const dot = document.createElement('span');
+        dot.classList.add(idx === currentIndex ? 'active' : '');
+        dot.addEventListener('click', () => openViewer(idx));
+        slideIndicators.appendChild(dot);
+    });
+}
+
+// Start slideshow
+function startSlideshow() {
+    isPlaying = true;
+    playBtn.innerHTML = '<i class="fas fa-pause"></i>'; // Change to pause icon
+    slideshowInterval = setInterval(showNext, 3000);
+}
+
+// Stop slideshow
+function stopSlideshow() {
+    isPlaying = false;
+    playBtn.innerHTML = '<i class="fas fa-play"></i>'; // Change to play icon
+    clearInterval(slideshowInterval);
+}
+
+// Toggle slideshow play/pause
+function toggleSlideshow() {
+    if (isPlaying) {
+        stopSlideshow();
+    } else {
+        startSlideshow();
+    }
+}
+
+// Event listeners for image click
 galleryImages.forEach((img, index) => {
     img.addEventListener('click', () => openViewer(index));
 });
 
-// Add event listeners for closing and navigation
+// Close modal when clicking the close button
 closeModal.addEventListener('click', closeViewer);
+
+// Navigate through images
 prevBtn.addEventListener('click', showPrev);
 nextBtn.addEventListener('click', showNext);
 
-// Close modal if user clicks outside of the image
+// Play/Pause slideshow
+playBtn.addEventListener('click', toggleSlideshow);
+
+// Close modal when clicking outside the image
 window.addEventListener('click', (event) => {
-    if (event.target === modal) {
-        closeViewer();
-    }
+    if (event.target === modal) closeViewer();
 });
 
-// Add keyboard navigation support
+// Keyboard navigation
 document.addEventListener('keydown', (e) => {
-    if (modal.style.display === 'block') {
+    if (modal.style.display === 'flex') {
         if (e.key === 'Escape') closeViewer();
         if (e.key === 'ArrowRight') showNext();
         if (e.key === 'ArrowLeft') showPrev();
     }
+});
+// AUTOPLAY FUNCTIONALITY
+function openViewer(index) {
+    currentIndex = index;
+    modal.style.display = 'flex';
+    modalImg.src = galleryImages[currentIndex].getAttribute('data-full');
+    captionText.innerHTML = `${galleryImages[currentIndex].getAttribute('data-model')}<br>${galleryImages[currentIndex].getAttribute('data-photographer')}`;
+    updateIndicators();
+    startSlideshow();  // Automatically start the slideshow when opened
+}
+
+// TOUCH GESTURE FUNCTIONALITY
+let touchStartX = 0;
+
+modal.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+});
+
+modal.addEventListener('touchend', (e) => {
+    let touchEndX = e.changedTouches[0].clientX;
+    if (touchEndX < touchStartX) showNext();
+    if (touchEndX > touchStartX) showPrev();
 });
 
 // ===================================

@@ -322,38 +322,26 @@
     </section>
 
     <!-- Lightbox Modal -->
-    <!-- Image Viewer Modal -->
-    <div id="imageModal" class="modal">
+    <div id="imageModal" class="image-viewer">
         <span class="close">&times;</span>
-        <img id="fullImage" class="modal-content">
-        <div id="caption"></div>
-        <div id="photo-credit" class="photo-credit">
-            <a id="credit-link" href="#" target="_blank" rel="noopener noreferrer">
-                <i class="fa-brands fa-instagram"></i> <span id="credit-text"></span>
-            </a>
-        </div>
-        <button id="prev-btn" class="nav-btn prev-btn">&#10094;</button>
-        <button id="next-btn" class="nav-btn next-btn">&#10095;</button>
-    </div>
-    <!-- Fullscreen Image Viewer -->
-    <!-- <div id="image-viewer" class="image-viewer">
-        <span class="close-btn">&times;</span>
-        <button id="prev-btn" class="nav-btn nav-btn-left" aria-label="Previous Image">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <img id="viewer-image" src="" alt="Full Image">
-        <div class="image-overlay">
-            <p id="model-info">Model: Jana Lister</p>
-            <p id="photographer-info">Photographer: Mary Davis</p>
-        </div>
-        <button id="next-btn" class="nav-btn nav-btn-right" aria-label="Next Image">
-            <i class="fas fa-chevron-right"></i>
-        </button>
+        <img id="fullImage" class="viewer-content" src="" alt="Full Image">
         <div class="image-info">
-            <p id="model-info"></p>
-            <p id="photographer-info"></p>
+            <p id="caption"></p>
         </div>
-    </div> -->
+    
+        <!-- Play/Pause Control Positioned Over Image -->
+        <button id="play-btn" class="play-btn">
+            <i class="fas fa-play"></i> <!-- Font Awesome Play Icon -->
+        </button>
+    
+        <!-- Navigation Buttons -->
+        <button id="prev-btn" class="nav-btn">&#10094;</button>
+        <button id="next-btn" class="nav-btn">&#10095;</button>
+    
+        <!-- Slide Indicators -->
+        <div id="slide-indicators" class="slide-indicators"></div>
+    </div>
+    
     <!-- Sticky Book Me Button -->
     <a href="contact.html" class="book-me-button">
         <i class="fas fa-calendar-alt"></i> Book Me
