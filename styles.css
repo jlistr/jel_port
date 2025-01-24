@@ -739,37 +739,49 @@ footer {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: none;
+    background: rgba(0, 0, 0, 0.5);  /* Semi-transparent background */
     border: none;
     color: #fff;
-    font-size: 2rem;
+    font-size: 4rem; /* Increase font size */
+    padding: 20px;  /* Increase clickable area */
+    border-radius: 50%; /* Make buttons circular */
     cursor: pointer;
     z-index: 10000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Add shadow effect */
+    transition: all 0.3s ease-in-out; /* Smooth transition for effects */
 }
 
+/* Add hover effect */
+.nav-btn:hover {
+    color: #ff7aa2;
+    background: rgba(0, 0, 0, 0.7); /* Darken background on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6); /* Stronger shadow on hover */
+    transform: translateY(-50%) scale(1.1); /* Slight zoom on hover */
+}
+
+/* Adjust positioning */
 #prev-btn {
-    left: 5%;
+    left: 3%; /* Adjust position */
 }
 
 #next-btn {
-    right: 5%;
-}
-.nav-btn-left {
-    left: 5%;
+    right: 3%; /* Adjust position */
 }
 
-.nav-btn-right {
-    right: 5%;
- }
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .nav-btn {
+        font-size: 2.5rem;
+        padding: 15px;
+    }
 
-.nav-btn:hover {
-    color: #ff7aa2;
-    
-}
+    #prev-btn {
+        left: 2%;
+    }
 
-/* Font Awesome Icons */
-.nav-btn i {
-    display: inline-block;
+    #next-btn {
+        right: 2%;
+    }
 }
 
 /* Close Button */

@@ -11,9 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeModal = document.querySelector('.close');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
-    const photoCredit = document.getElementById('photo-credit');
-    const creditLink = document.getElementById('credit-link');
-    const creditText = document.getElementById('credit-text');
     const playBtn = document.getElementById('play-btn');
     const slideIndicators = document.getElementById('slide-indicators');
 
