@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
     const playBtn = document.getElementById('play-btn');
-    const slideIndicators = document.getElementById('slide-indicators');
 
     // Only execute the code if modal elements are found
     if (modal && closeModal && prevBtn && nextBtn && playBtn) {
@@ -27,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
             modal.style.display = 'flex';
             modalImg.src = image.getAttribute('data-full');
             captionText.innerHTML = `${image.getAttribute('data-model')}<br>${image.getAttribute('data-photographer')}`;
-            updateIndicators();
+            
             
         }
 
@@ -49,28 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
             openViewer(currentIndex);
         }
 
-        // Update slide indicators
-        function updateIndicators() {
-            if (!slideIndicators) {
-                console.warn("Slide indicators element not found in the DOM.");
-                return;
-            }
-        
-            slideIndicators.innerHTML = ''; // Clear existing indicators
-        
-            galleryImages.forEach((_, idx) => {
-                const dot = document.createElement('span');
-        
-                // Add the 'active' class only if the current index matches
-                if (idx === currentIndex) {
-                    dot.classList.add('active');
-                }
-        
-                dot.addEventListener('click', () => openViewer(idx));
-        
-                slideIndicators.appendChild(dot);
-            });
-        }
 
         // Start slideshow
         function startSlideshow() {
