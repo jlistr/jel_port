@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
             modalImg.src = image.getAttribute('data-full');
             captionText.innerHTML = `${image.getAttribute('data-model')}<br>${image.getAttribute('data-photographer')}`;
             updateIndicators();
-            startSlideshow();  // Automatically start the slideshow when opened
+            
         }
 
         // Close the modal
@@ -51,11 +51,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Update slide indicators
         function updateIndicators() {
-            slideIndicators.innerHTML = '';
+            if (!slideIndicators) {
+                console.warn("Slide indicators element not found in the DOM.");
+                return;
+            }
+        
+            slideIndicators.innerHTML = ''; // Clear existing indicators
+        
             galleryImages.forEach((_, idx) => {
                 const dot = document.createElement('span');
-                dot.classList.add(idx === currentIndex ? 'active' : '');
+        
+                // Add the 'active' class only if the current index matches
+                if (idx === currentIndex) {
+                    dot.classList.add('active');
+                }
+        
                 dot.addEventListener('click', () => openViewer(idx));
+        
                 slideIndicators.appendChild(dot);
             });
         }
@@ -150,11 +162,19 @@ if (menuToggle && menuOverlay && menuCloseButton) {
 // MASONRY GALLERY LAYOUT
 // ===================================
 
-galleryImages.forEach((img) => {
-    img.onload = () => {
-        const aspectRatio = img.naturalWidth / img.naturalHeight;
-        img.style.gridRowEnd = aspectRatio > 1 ? 'span 1' : 'span 3';
-    };
+document.addEventListener("DOMContentLoaded", function () {
+    const galleryImages = document.querySelectorAll('.gallery-image');
+
+    if (galleryImages.length > 0) {
+        galleryImages.forEach((img) => {
+            img.onload = () => {
+                const aspectRatio = img.naturalWidth / img.naturalHeight;
+                img.style.gridRowEnd = aspectRatio > 1 ? 'span 1' : 'span 3';
+            };
+        });
+    } else {
+        console.warn("No gallery images found on this page.");
+    }
 });
 
 // ===================================
@@ -179,45 +199,35 @@ document.addEventListener('DOMContentLoaded', () => {
 // FORM SUBMISSION HANDLING
 // ===================================
 
-document.getElementById("contactForm").addEventListener("submit", async function (e) {
-    e.preventDefault(); // Prevent the default form submission
+document.addEventListener("DOMContentLoaded", function () {
+    const contactForm = document.getElementById("contactForm");
+    if (contactForm) {
+        contactForm.addEventListener("submit", async function (e) {
+            e.preventDefault(); // Prevent default submission
 
-    const form = e.target;
-    const submitButton = form.querySelector(".submit-btn");
+            const formData = new FormData(contactForm);
 
-    // Validate form fields before submitting
-    if (!form.checkValidity()) {
-        showToaster("Please fill out all required fields correctly.");
-        return;
-    }
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: contactForm.method,
+                    body: formData,
+                    headers: {
+                        Accept: "application/json",
+                    },
+                });
 
-    // Show loading state and disable button to prevent duplicate submissions
-    submitButton.textContent = "Sending...";
-    submitButton.disabled = true;
-
-    const formData = new FormData(form);
-
-    try {
-        const response = await fetch(form.action, {
-            method: form.method,
-            body: formData,
-            headers: { Accept: "application/json" },
+                if (response.ok) {
+                    showToaster("Thank you! Your message has been sent."); 
+                    contactForm.reset();
+                } else {
+                    showToaster("Oops! There was a problem. Please try again.");
+                }
+            } catch (error) {
+                showToaster("An error occurred. Please try again.");
+                console.error("Form submission error:", error);
+            }
         });
-
-        if (response.ok) {
-            showToaster("Thank you! Your message has been sent.");
-            form.reset();
-        } else {
-            showToaster("Oops! There was a problem. Please try again.");
-        }
-    } catch (error) {
-        showToaster("An error occurred. Please try again.");
-        console.error("Form submission error:", error);
     }
-
-    // Reset button text and enable it after processing
-    submitButton.textContent = "SEND";
-    submitButton.disabled = false;
 });
 
 // Show toaster messages
