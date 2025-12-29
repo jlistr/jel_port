@@ -1,0 +1,72 @@
+import PageLayout from '../components/PageLayout';
+import Gallery from '../components/Gallery';
+
+export const metadata = {
+  title: 'Professional Model Portfolio | Jana Elise Lister',
+  description: "Explore Jana Elise Lister's professional modeling portfolio featuring editorial, commercial, and creative photoshoots. Hire in Austin, San Antonio, and New Braunfels.",
+  keywords: 'Professional Model Portfolio, Jana Elise Lister, Editorial Model, Commercial Model, Fashion Photoshoot, Austin Model, San Antonio Model, New Braunfels Model',
+};
+
+const portfolioImages = [
+  { src: '/img/model/01_BB62E153-C9C2-4908-89D1-832EE6A1195D_1_105_c_400x599.webp', fullSrc: '/img/model/01_BB62E153-C9C2-4908-89D1-832EE6A1195D_1_105_c.webp', alt: 'Portfolio Image 1', model: 'Model: Jana Lister', photographer: 'Photographer: Michael Zeyda (@mzeydaphoto)' },
+  { src: '/img/model/02_09097F70-7EEC-416D-9BFA-76F5470B79F9_1_105_c_600x400.webp', fullSrc: '/img/model/02_09097F70-7EEC-416D-9BFA-76F5470B79F9_1_105_c.webp', alt: 'Portfolio Image 2', model: 'Model: Jana Lister', photographer: 'Photographer: San Antonio Photographer (@harmony_photography_)' },
+  { src: '/img/model/03_D9470364-BFDE-4F64-B724-D5F4B23BCC2F_1_105_c_400x600.webp', fullSrc: '/img/model/03_D9470364-BFDE-4F64-B724-D5F4B23BCC2F_1_105_c.webp', alt: 'Portfolio Image 3', model: 'Model: Jana Lister', photographer: 'Photographer: Yanina K.B. SA TX (@ykb_photo)' },
+  { src: '/img/model/3_1_MG_4852_600x400_corrected.webp', fullSrc: '/img/model/3_1_MG_4852_corrected.webp', alt: 'Portfolio Image 3_1', model: 'Model: Jana Lister', photographer: 'Photographer: Jason X. Hudson (@jasonxphotography)' },
+  { src: '/img/model/04_203ED6B5-1FC1-4BD4-B58E-95DB1F1BF1C0_400x600.webp', fullSrc: '/img/model/04_203ED6B5-1FC1-4BD4-B58E-95DB1F1BF1C0.webp', alt: 'Portfolio Image 4', model: 'Model: Jana Lister', photographer: 'Photographer: San Antonio Photographer (@harmony_photography_)' },
+  { src: '/img/model/05_84DA4C64-5F60-475A-BD80-70AA0445AB78_1_105_c_400x600.webp', fullSrc: '/img/model/05_84DA4C64-5F60-475A-BD80-70AA0445AB78_1_105_c.webp', alt: 'Portfolio Image 5', model: 'Model: Jana Lister', photographer: 'Photographer: Eric Schneeman (@each.charterd.street)' },
+  { src: '/img/model/5_1_MG_5271_600x400_corrected.webp', fullSrc: '/img/model/5_1_MG_5271_corrected.webp', alt: 'Portfolio Image 5_1', model: 'Model: Jana Lister', photographer: 'Photographer: Jason X. Hudson (@jasonxphotography)' },
+  { src: '/img/model/06_69B6F427-21FC-4002-A5D0-DCF75A19B59E_600x480.webp', fullSrc: '/img/model/06_69B6F427-21FC-4002-A5D0-DCF75A19B59E.webp', alt: 'Portfolio Image 6', model: 'Model: Jana Lister', photographer: 'Photographer: Michael Zeyda (@mzeydaphoto)' },
+  { src: '/img/model/07_D06D5469-9F76-4932-8AF2-E1CC40F93497_1_105_c_600x400.webp', fullSrc: '/img/model/07_D06D5469-9F76-4932-8AF2-E1CC40F93497_1_105_c.webp', alt: 'Portfolio Image 7', model: 'Model: Jana Lister', photographer: 'Photographer: Central Texas Photographer portrait Austin/San Antonio (@portraitphotoaplp)' },
+  { src: '/img/model/08_160E8844-D5CA-4D67-827F-9531D18EB978_1_105_c_400x600.webp', fullSrc: '/img/model/08_160E8844-D5CA-4D67-827F-9531D18EB978_1_105_c.webp', alt: 'Portfolio Image 8', model: 'Model: Jana Lister', photographer: 'Photographer: Jenna Claire (@jennaclairephoto)' },
+  { src: '/img/model/09_0CFF7EB0-9D94-43FC-B5F3-0ADCE6D489F6_400x600.webp', fullSrc: '/img/model/09_0CFF7EB0-9D94-43FC-B5F3-0ADCE6D489F6.webp', alt: 'Portfolio Image 9', model: 'Model: Jana Lister', photographer: 'Photographer: San Antonio Photographer (@harmony_photography_)' },
+  { src: '/img/model/10_32A3B427-4DB3-4EAD-A6C6-8C38DFFDF2D0_480x600.webp', fullSrc: '/img/model/10_32A3B427-4DB3-4EAD-A6C6-8C38DFFDF2D0.webp', alt: 'Portfolio Image 10', model: 'Model: Jana Lister', photographer: 'Photographer: Briston Tunon (@_briston_)' },
+  { src: '/img/model/11_33195883-0EDC-4D2C-AD6A-D0A10BDF9E20_600x480.webp', fullSrc: '/img/model/11_33195883-0EDC-4D2C-AD6A-D0A10BDF9E20.webp', alt: 'Portfolio Image 11', model: 'Model: Jana Lister', photographer: 'Photographer: Michael Zeyda (@mzeydaphoto)' },
+  { src: '/img/model/11_1_MG_5937_600x400_corrected.webp', fullSrc: '/img/model/11_1_MG_5937_corrected.webp', alt: 'Portfolio Image 11_1', model: 'Model: Jana Lister', photographer: 'Photographer: Jason X. Hudson (@jasonxphotography)' },
+  { src: '/img/model/12_40F9038B-6A7B-47BA-A247-3ACD0F44957B_1_105_c_400x600.webp', fullSrc: '/img/model/12_40F9038B-6A7B-47BA-A247-3ACD0F44957B_1_105_c.webp', alt: 'Portfolio Image 12', model: 'Model: Jana Lister', photographer: 'Photographer: Central Texas Photographer portrait Austin/San Antonio (@portraitphotoaplp)' },
+  { src: '/img/model/13_F222AAB9-C5BB-4C4D-A487-B5806A96EF9B_1_105_c_400x600.webp', fullSrc: '/img/model/13_F222AAB9-C5BB-4C4D-A487-B5806A96EF9B_1_105_c.webp', alt: 'Portfolio Image 13', model: 'Model: Jana Lister', photographer: 'Photographer: Eric Schneeman (@each.charterd.street)' },
+  { src: '/img/model/14_D62A6636-ABAF-4D37-9DBD-7BA21AC18F8D_1_105_c_400x600.webp', fullSrc: '/img/model/14_D62A6636-ABAF-4D37-9DBD-7BA21AC18F8D_1_105_c.webp', alt: 'Portfolio Image 14', model: 'Model: Jana Lister', photographer: 'Photographer: Central Texas Photographer portrait Austin/San Antonio (@portraitphotoaplp)' },
+  { src: '/img/model/15_159F9C9F-58BB-4A05-A02E-80A83A82D2B7_1_105_c_400x600.webp', fullSrc: '/img/model/15_159F9C9F-58BB-4A05-A02E-80A83A82D2B7_1_105_c.webp', alt: 'Portfolio Image 15', model: 'Model: Jana Lister', photographer: 'Photographer: Yanina K.B. SA TX (@ykb_photo)' },
+  { src: '/img/model/16_EF6D13DC-D0BD-4C4B-B75D-F7FE77053A6E_600x480.webp', fullSrc: '/img/model/16_EF6D13DC-D0BD-4C4B-B75D-F7FE77053A6E.webp', alt: 'Portfolio Image 16', model: 'Model: Jana Lister', photographer: 'Photographer: Michael Zeyda (@mzeydaphoto)' },
+  { src: '/img/model/17_2EBA5277-DE1A-410A-B60E-C41F2EE4ED05_1_105_c_600x400.webp', fullSrc: '/img/model/17_2EBA5277-DE1A-410A-B60E-C41F2EE4ED05_1_105_c.webp', alt: 'Portfolio Image 17', model: 'Model: Jana Lister', photographer: 'Photographer: Eric Schneeman (@each.charterd.street)' },
+  { src: '/img/model/17_1_MG_6169_600x400_corrected.webp', fullSrc: '/img/model/17_1_MG_6169_corrected.webp', alt: 'Portfolio Image 17_1', model: 'Model: Jana Lister', photographer: 'Photographer: Jason X. Hudson (@jasonxphotography)' },
+  { src: '/img/model/18_86C7E370-832B-45C0-B8FC-53CB17D72E7D_1_105_c_400x600.webp', fullSrc: '/img/model/18_86C7E370-832B-45C0-B8FC-53CB17D72E7D_1_105_c.webp', alt: 'Portfolio Image 18', model: 'Model: Jana Lister', photographer: 'Photographer: San Antonio Photographer (@harmony_photography_)' },
+  { src: '/img/model/19_F39C4895-0AB8-4AC2-926B-1DF7BF710CF7_1_105_c_400x600.webp', fullSrc: '/img/model/19_F39C4895-0AB8-4AC2-926B-1DF7BF710CF7_1_105_c.webp', alt: 'Portfolio Image 19', model: 'Model: Jana Lister', photographer: 'Photographer: Jenna Claire (@jennaclairephoto)' },
+  { src: '/img/model/20_BA7241CE-FE7D-4F8D-B3C9-EED56F3FAA5C_1_105_c_400x599.webp', fullSrc: '/img/model/20_BA7241CE-FE7D-4F8D-B3C9-EED56F3FAA5C_1_105_c.webp', alt: 'Portfolio Image 20', model: 'Model: Jana Lister', photographer: 'Photographer: Michael Zeyda (@mzeydaphoto)' },
+  { src: '/img/model/21_8834EB1F-281A-4084-9364-39F248BA15C6_1_105_c_400x600.webp', fullSrc: '/img/model/21_8834EB1F-281A-4084-9364-39F248BA15C6_1_105_c.webp', alt: 'Portfolio Image 21', model: 'Model: Jana Lister', photographer: 'Photographer: Eric Schneeman (@each.charterd.street)' },
+  { src: '/img/model/22_F29ADDCE-4F15-49C7-AB5A-56618BB1D459_1_105_c_400x600.webp', fullSrc: '/img/model/22_F29ADDCE-4F15-49C7-AB5A-56618BB1D459_1_105_c.webp', alt: 'Portfolio Image 22', model: 'Model: Jana Lister', photographer: 'Photographer: Central Texas Photographer portrait Austin/San Antonio (@portraitphotoaplp)' },
+  { src: '/img/model/23_5678DDFD-0DD1-4AAE-AB50-98699A7D3E83_413x600.webp', fullSrc: '/img/model/23_5678DDFD-0DD1-4AAE-AB50-98699A7D3E83.webp', alt: 'Portfolio Image 23', model: 'Model: Jana Lister', photographer: 'Photographer: San Antonio Photographer (@harmony_photography_)' },
+  { src: '/img/model/24_BC8DC874-2F4D-4A94-9D1F-5ED8C431034D_1_105_c_400x600.webp', fullSrc: '/img/model/24_BC8DC874-2F4D-4A94-9D1F-5ED8C431034D_1_105_c.webp', alt: 'Portfolio Image 24', model: 'Model: Jana Lister', photographer: 'Photographer: Yanina K.B. SA TX (@ykb_photo)' },
+  { src: '/img/model/25_9BC6FBD2-1E8E-453D-8571-0704ABD3C000_600x400.webp', fullSrc: '/img/model/25_9BC6FBD2-1E8E-453D-8571-0704ABD3C000.webp', alt: 'Portfolio Image 25', model: 'Model: Jana Lister', photographer: 'Photographer: San Antonio Photographer (@harmony_photography_)' },
+  { src: '/img/model/25_1_MG_6529_600x400_corrected.webp', fullSrc: '/img/model/25_1_MG_6529_corrected.webp', alt: 'Portfolio Image 25_1', model: 'Model: Jana Lister', photographer: 'Photographer: Jason X. Hudson (@jasonxphotography)' },
+  { src: '/img/model/26_63BFA699-B78C-40AA-AD96-DAE375AF23F3_1_105_c_452x599.webp', fullSrc: '/img/model/26_63BFA699-B78C-40AA-AD96-DAE375AF23F3_1_105_c.webp', alt: 'Portfolio Image 26', model: 'Model: Jana Lister', photographer: 'Photographer: Jenna Claire (@jennaclairephoto)' },
+  { src: '/img/model/27_84B93A3B-A434-4887-8DEF-A3758922500F_1_105_c_400x599.webp', fullSrc: '/img/model/27_84B93A3B-A434-4887-8DEF-A3758922500F_1_105_c.webp', alt: 'Portfolio Image 27', model: 'Model: Jana Lister', photographer: 'Photographer: Michael Zeyda (@mzeydaphoto)' },
+  { src: '/img/model/28_A1396297-1E99-435F-88C7-A46BE8E5D0B9_480x600.webp', fullSrc: '/img/model/28_A1396297-1E99-435F-88C7-A46BE8E5D0B9.webp', alt: 'Portfolio Image 28', model: 'Model: Jana Lister', photographer: 'Photographer: Briston Tunon (@_briston_)' },
+  { src: '/img/model/29_DA69C81B-1436-4850-A423-FDA83FC342CD_435x600.webp', fullSrc: '/img/model/29_DA69C81B-1436-4850-A423-FDA83FC342CD.webp', alt: 'Portfolio Image 29', model: 'Model: Jana Lister', photographer: 'Photographer: Leslie | Satx + Atx Photographer (@leslielizabeth.pics)' },
+  { src: '/img/model/32_EFA13F5D-12C9-4771-8BAC-EAC3B889F4D9_1_105_c_400x600.webp', fullSrc: '/img/model/32_EFA13F5D-12C9-4771-8BAC-EAC3B889F4D9_1_105_c.webp', alt: 'Portfolio Image 32', model: 'Model: Jana Lister', photographer: 'Photographer: Central Texas Photographer portrait Austin/San Antonio (@portraitphotoaplp)' },
+  { src: '/img/model/33_8E39C384-460E-41DE-AF6B-1426F5A66161_1_105_c_400x599.webp', fullSrc: '/img/model/33_8E39C384-460E-41DE-AF6B-1426F5A66161_1_105_c.webp', alt: 'Portfolio Image 33', model: 'Model: Jana Lister', photographer: 'Photographer: Michael Zeyda (@mzeydaphoto)' },
+  { src: '/img/model/34_956FA5FE-2816-451B-B712-30C8234E244C_1_105_c_400x600.webp', fullSrc: '/img/model/34_956FA5FE-2816-451B-B712-30C8234E244C_1_105_c.webp', alt: 'Portfolio Image 34', model: 'Model: Jana Lister', photographer: 'Photographer: Eric Schneeman (@each.charterd.street)' },
+  { src: '/img/model/35_A837F5BE-E34B-4DFC-96AE-70B8701FE4DE_1_105_c_400x600.webp', fullSrc: '/img/model/35_A837F5BE-E34B-4DFC-96AE-70B8701FE4DE_1_105_c.webp', alt: 'Portfolio Image 35', model: 'Model: Jana Lister', photographer: 'Photographer: Central Texas Photographer portrait Austin/San Antonio (@portraitphotoaplp)' },
+  { src: '/img/model/36_710076B8-B342-4B13-B666-039A1F3481E7_1_105_c_400x600.webp', fullSrc: '/img/model/36_710076B8-B342-4B13-B666-039A1F3481E7_1_105_c.webp', alt: 'Portfolio Image 36', model: 'Model: Jana Lister', photographer: 'Photographer: Jenna Claire (@jennaclairephoto)' },
+  { src: '/img/model/37_9C6E10B7-676B-4E39-AB84-E80C404745B9_1_105_c_444x599.webp', fullSrc: '/img/model/37_9C6E10B7-676B-4E39-AB84-E80C404745B9_1_105_c.webp', alt: 'Portfolio Image 37', model: 'Model: Jana Lister', photographer: 'Photographer: Central Texas Photographer portrait Austin/San Antonio (@portraitphotoaplp)' },
+  { src: '/img/model/38_109D69D0-BE54-4AE4-A2A8-C9346F4C812E_1_105_c_400x600.webp', fullSrc: '/img/model/38_109D69D0-BE54-4AE4-A2A8-C9346F4C812E_1_105_c.webp', alt: 'Portfolio Image 38', model: 'Model: Jana Lister', photographer: 'Photographer: Central Texas Photographer portrait Austin/San Antonio (@portraitphotoaplp)' },
+  { src: '/img/model/39_EB789032-3CB9-484E-9C26-503D538CF399_1_105_c_400x600.webp', fullSrc: '/img/model/39_EB789032-3CB9-484E-9C26-503D538CF399_1_105_c.webp', alt: 'Portfolio Image 39', model: 'Model: Jana Lister', photographer: 'Photographer: Eric Schneeman (@each.charterd.street)' },
+  { src: '/img/model/40_5B6AB390-1139-4FD8-A0D7-0C606D500322_1_105_c_600x400.webp', fullSrc: '/img/model/40_5B6AB390-1139-4FD8-A0D7-0C606D500322_1_105_c.webp', alt: 'Portfolio Image 40', model: 'Model: Jana Lister', photographer: 'Photographer: Central Texas Photographer portrait Austin/San Antonio (@portraitphotoaplp)' },
+  { src: '/img/model/41_936F88D3-F27C-4AA9-9759-529E219140CA_1_105_c_400x600.webp', fullSrc: '/img/model/41_936F88D3-F27C-4AA9-9759-529E219140CA_1_105_c.webp', alt: 'Portfolio Image 41', model: 'Model: Jana Lister', photographer: 'Photographer: Jenna Claire (@jennaclairephoto)' },
+  { src: '/img/model/42_D04B6A58-93EE-4CA6-9331-723E79B5CC3B_1_105_c_600x400.webp', fullSrc: '/img/model/42_D04B6A58-93EE-4CA6-9331-723E79B5CC3B_1_105_c.webp', alt: 'Portfolio Image 42', model: 'Model: Jana Lister', photographer: 'Photographer: Leslie | Satx + Atx Photographer (@leslielizabeth.pics)' },
+  { src: '/img/model/43_2E48F98C-2663-4638-8180-7FFB1533C2C4_1_105_c_600x400.webp', fullSrc: '/img/model/43_2E48F98C-2663-4638-8180-7FFB1533C2C4_1_105_c.webp', alt: 'Portfolio Image 43', model: 'Model: Jana Lister', photographer: 'Photographer: Leslie | Satx + Atx Photographer (@leslielizabeth.pics)' },
+  { src: '/img/model/44_97A487C3-5260-4302-A7AF-36507C189A1F_1_105_c_400x600.webp', fullSrc: '/img/model/44_97A487C3-5260-4302-A7AF-36507C189A1F_1_105_c.webp', alt: 'Portfolio Image 44', model: 'Model: Jana Lister', photographer: 'Photographer: Central Texas Photographer portrait Austin/San Antonio (@portraitphotoaplp)' },
+];
+
+export default function PortfolioPage() {
+  return (
+    <PageLayout>
+      <section id="portfolio" className="portfolio">
+        <h1>Professional Modeling Portfolio of Jana Elise Lister</h1>
+        <h2>Editorial, Commercial, and Creative Photoshoots</h2>
+        <h2>Available for Hire in Austin, San Antonio &amp; New Braunfels</h2>
+        <Gallery images={portfolioImages} />
+      </section>
+    </PageLayout>
+  );
+}
+
