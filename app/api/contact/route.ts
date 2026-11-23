@@ -57,9 +57,54 @@ function jsonError(error: string, status: number) {
   return NextResponse.json({ error }, { status });
 }
 
+class PayloadTooLarge extends Error {}
+
+function declaredLengthIsTooLarge(request: Request): boolean {
+  const declared = Number(request.headers.get("content-length") ?? "");
+  return Number.isFinite(declared) && declared > MAX_BODY_BYTES;
+}
+
+async function readLimitedText(request: Request): Promise<string> {
+  if (declaredLengthIsTooLarge(request)) {
+    throw new PayloadTooLarge();
+  }
+  if (!request.body) return "";
+
+  const reader = request.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let received = 0;
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      if (!value?.byteLength) continue;
+      received += value.byteLength;
+      if (received > MAX_BODY_BYTES) {
+        await reader.cancel();
+        throw new PayloadTooLarge();
+      }
+      chunks.push(value);
+    }
+  } finally {
+    try {
+      reader.releaseLock();
+    } catch {
+      // The reader is already cancelled once the body passes the limit.
+    }
+  }
+
+  const bytes = new Uint8Array(received);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return new TextDecoder().decode(bytes);
+}
+
 export async function POST(request: Request) {
-  const lengthHeader = Number(request.headers.get("content-length") ?? "0");
-  if (Number.isFinite(lengthHeader) && lengthHeader > MAX_BODY_BYTES) {
+  if (declaredLengthIsTooLarge(request)) {
     return jsonError("That message is too long. Please shorten it and try again.", 413);
   }
 
@@ -77,12 +122,12 @@ export async function POST(request: Request) {
 
   let payload: unknown;
   try {
-    const text = await request.text();
-    if (text.length > MAX_BODY_BYTES) {
+    const text = await readLimitedText(request);
+    payload = JSON.parse(text);
+  } catch (error) {
+    if (error instanceof PayloadTooLarge) {
       return jsonError("That message is too long. Please shorten it and try again.", 413);
     }
-    payload = JSON.parse(text);
-  } catch {
     return jsonError("The form could not be read. Please try again.", 400);
   }
 
