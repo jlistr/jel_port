@@ -35,9 +35,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </Link>
           ))}
         </div>
-        <Link href="/admin" className="mobile-admin-link" onClick={onClose} title="Go to admin">
-          Go to admin
-        </Link>
         <button className="menu-close" aria-label="Close menu" onClick={onClose}>
           <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="30" width="30">
             <line x1="18" y1="6" x2="6" y2="18"></line>
