@@ -5,6 +5,7 @@ export const metadata = {
   title: 'Modeling Services in Austin, San Antonio and New Braunfels | Hire a Professional Model',
   description: 'Professional modeling services in Austin, San Antonio, and New Braunfels. Hire a model for fashion, commercial, and print projects.',
   keywords: 'Professional Model Austin, Modeling Services San Antonio, Hire Model New Braunfels, Texas Fashion Model, Commercial Model Texas',
+  alternates: { canonical: '/services' },
 };
 
 export default function ServicesPage() {

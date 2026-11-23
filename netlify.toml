@@ -2,6 +2,10 @@
   command = "npm run build"
   publish = ".next"
 
+# Next.js 16 requires Node 20.9+. Pin 22, the version this repo builds with.
+[build.environment]
+  NODE_VERSION = "22"
+
 [functions]
   directory = "netlify/functions"
 

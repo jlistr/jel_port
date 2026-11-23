@@ -6,6 +6,7 @@ export const metadata = {
   title: 'About Jana Elise Lister | Professional Model & Creative Performer',
   description: 'Discover the professional journey of Jana Elise Lister, a model and creative performer specializing in editorial, commercial, runway, and print work.',
   keywords: 'Jana Elise Lister, professional model, editorial modeling, commercial modeling, runway model, fashion performer, creative artist, New Braunfels TX model',
+  alternates: { canonical: '/about' },
 };
 
 export default function AboutPage() {
@@ -17,7 +18,7 @@ export default function AboutPage() {
         <div className="image-block">
           <Image
             src="/img/model/85844D33-F39A-47D2-8313-8FE78AC1D8FE.webp"
-            alt="Jana Elise Lister Professional Model"
+            alt="Jana Elise Lister, black and white editorial portrait in a white eyelet top"
             width={300}
             height={300}
             style={{ objectFit: 'cover' }}
